@@ -1,0 +1,8 @@
+numpy>=2.0
+scipy>=1.13
+torch>=2.2
+pymoo>=0.6
+PyYAML>=6.0
+pytest>=8.0
+coverage>=7.0
+ruff>=0.15
