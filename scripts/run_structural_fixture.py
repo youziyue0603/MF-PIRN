@@ -13,15 +13,15 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 def main() -> int:
-    from frank_wt_mf_pinn.engine import AlgorithmConfig, FrankWTMFPINNOptimizer
-    from frank_wt_mf_pinn.fixtures import (
+    from frank_wt_mf_pirn.engine import AlgorithmConfig, FrankWTMFPIRNOptimizer
+    from frank_wt_mf_pirn.fixtures import (
         DeterministicFixtureEvaluator,
         FixtureObjectiveProjector,
         FixtureReliabilityEstimator,
         fitted_fixture_calibrator,
     )
-    from frank_wt_mf_pinn.residual import AdjacentResidualPINN
-    from frank_wt_mf_pinn.schema import DesignDomain
+    from frank_wt_mf_pirn.residual import AdjacentResidualPIRN
+    from frank_wt_mf_pirn.schema import DesignDomain
 
     domain = DesignDomain()
     response_scales = np.asarray([1.0, 8.0, 1.0, 2.0, 1.0, 20.0, 3.0, 1.0])
@@ -37,7 +37,7 @@ def main() -> int:
         replay_capacity=24,
         structural_fixture=True,
     )
-    residual = AdjacentResidualPINN(
+    residual = AdjacentResidualPIRN(
         response_scales=response_scales,
         energy_scale=4.0,
         hidden=(8,),
@@ -45,7 +45,7 @@ def main() -> int:
         epochs=1,
         seed=config.seed,
     )
-    optimizer = FrankWTMFPINNOptimizer(
+    optimizer = FrankWTMFPIRNOptimizer(
         config,
         domain,
         DeterministicFixtureEvaluator(domain),

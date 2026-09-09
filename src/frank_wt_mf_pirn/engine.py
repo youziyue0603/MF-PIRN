@@ -13,7 +13,7 @@ from .reliability import (
     ReliabilityEstimator,
     passes_gate,
 )
-from .residual import AdjacentResidualPINN, TriCriterionReplay
+from .residual import AdjacentResidualPIRN, TriCriterionReplay
 from .schema import DesignDomain, GateThresholds
 
 
@@ -124,7 +124,7 @@ class OptimizationRun:
     iterations: tuple[IterationAudit, ...]
 
 
-class FrankWTMFPINNOptimizer:
+class FrankWTMFPIRNOptimizer:
     """Executable transcription of Algorithm 1 in the final Version 1.5 paper."""
 
     def __init__(
@@ -132,7 +132,7 @@ class FrankWTMFPINNOptimizer:
         config: AlgorithmConfig,
         domain: DesignDomain,
         evaluator: FidelityEvaluator,
-        residual_model: AdjacentResidualPINN,
+        residual_model: AdjacentResidualPIRN,
         reliability_estimator: ReliabilityEstimator,
         objective_projector: ObjectiveProjector,
         *,

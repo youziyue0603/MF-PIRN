@@ -29,7 +29,7 @@ class LossWeights:
             self.consolidation,
         )
         if any(not np.isfinite(value) or value < 0.0 for value in values):
-            raise ValueError("All manuscript PINN and EWC loss weights must be finite and nonnegative.")
+            raise ValueError("All manuscript PIRN and EWC loss weights must be finite and nonnegative.")
 
 
 @dataclass(frozen=True)
@@ -78,7 +78,7 @@ def model_input(record: EvaluationRecord) -> np.ndarray:
     )
 
 
-class AdjacentResidualPINN:
+class AdjacentResidualPIRN:
     """Descriptor-level implementation of manuscript Eqs. (13)-(20).
 
     One ensemble is fitted for each adjacent correction F0->F1, F1->F2 and

@@ -1,7 +1,7 @@
 """Strict structural reproduction of the final Version 1.5 algorithm."""
 
 from .acquisition import AcquisitionPrediction, select_dual_infill
-from .engine import AlgorithmConfig, FrankWTMFPINNOptimizer
+from .engine import AlgorithmConfig, FrankWTMFPIRNOptimizer
 from .mechanics import (
     frank_energy_density,
     normalized_solver_residuals,
@@ -20,7 +20,7 @@ __all__ = [
     "DesignDomain",
     "EvaluationRecord",
     "FidelityRepository",
-    "FrankWTMFPINNOptimizer",
+    "FrankWTMFPIRNOptimizer",
     "GateThresholds",
     "SolverDiagnostics",
     "frank_energy_density",
@@ -31,4 +31,3 @@ __all__ = [
     "thermal_fraction",
     "warner_terentjev_energy_density",
 ]
-
