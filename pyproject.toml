@@ -3,9 +3,9 @@ requires = ["setuptools>=69", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "frank-wt-mf-pinn-final15"
+name = "fwt-mf-pirn"
 version = "0.1.0"
-description = "Source-locked structural transcription of the final Version 1.5 algorithm"
+description = "Implementation of FWT-MF-PIRN for multi-fidelity LCE inverse design"
 requires-python = ">=3.11"
 dependencies = [
   "numpy>=2.0",
@@ -23,4 +23,3 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-
