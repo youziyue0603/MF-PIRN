@@ -911,6 +911,66 @@ def compose_transfer_robustness_figure():
         save_pdf_without_tight_crop(fig, output_path)
 
 
+def plot_supplementary_figures() -> None:
+    analytical = pd.read_csv(DATA / "analytical_generalization_runs.csv")
+    candidates = pd.read_csv(DATA / "candidate_14D_designs.csv")
+    analytical_methods = METHODS[:7]
+
+    means = (
+        analytical.groupby(["task", "method"])
+        .normalized_HV.mean()
+        .unstack()[analytical_methods]
+    )
+    ranks = means.rank(axis=1, ascending=False, method="average")
+    with plt.rc_context(publication_style()):
+        fig, ax = plt.subplots(figsize=scaled_size(7.2, 4.4), layout="constrained")
+        image = ax.imshow(
+            ranks.to_numpy(),
+            cmap="viridis_r",
+            aspect="auto",
+            vmin=1,
+            vmax=len(analytical_methods),
+        )
+        ax.set_xticks(np.arange(len(analytical_methods)))
+        ax.set_xticklabels(analytical_methods, rotation=80, ha="right")
+        ax.set_yticks(np.arange(len(ranks)))
+        ax.set_yticklabels(ranks.index)
+        colorbar = fig.colorbar(image, ax=ax, fraction=0.035, pad=0.02)
+        colorbar.set_label("Rank")
+        save_pdf_without_tight_crop(fig, OUTPUT / "Figure_11.pdf")
+
+    variables = [
+        "RR_um",
+        "rr_um",
+        "HH_um",
+        "LL_mm",
+        "alpha_out_1_C",
+        "k_out_W_mK",
+        "rho_out_kg_m3",
+        "alpha_in_1_C",
+        "k_in_W_mK",
+        "rho_in_kg_m3",
+        "E1_MPa",
+        "E2_MPa",
+        "Tc_C",
+        "Delta_C",
+    ]
+    responses = ["shape_error", "specific_blocking_force_mN_g", "peak_stress_ratio"]
+    correlation = candidates[variables + responses].corr().loc[variables, responses]
+    with plt.rc_context(publication_style()):
+        fig, ax = plt.subplots(figsize=scaled_size(5.4, 5.0), layout="constrained")
+        image = ax.imshow(
+            correlation.to_numpy(), cmap="RdBu_r", aspect="auto", vmin=-1, vmax=1
+        )
+        ax.set_xticks(np.arange(3))
+        ax.set_xticklabels(["Shape error", "Specific force", "Peak-stress ratio"])
+        ax.set_yticks(np.arange(len(variables)))
+        ax.set_yticklabels(variables)
+        colorbar = fig.colorbar(image, ax=ax, fraction=0.045, pad=0.025)
+        colorbar.set_label("Pearson correlation")
+        save_pdf_without_tight_crop(fig, OUTPUT / "Figure_12.pdf")
+
+
 def main() -> None:
     regenerate_physics_validation_figure()
     regenerate_main_comparison_figure()
@@ -918,6 +978,7 @@ def main() -> None:
     generate_aligned_ablation_source()
     compose_transfer_robustness_figure()
     regenerate_device_validation_figure()
+    plot_supplementary_figures()
 
 
 if __name__ == "__main__":
