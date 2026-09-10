@@ -15,10 +15,18 @@ network (FWT-MF-PIRN) for inverse design of LCE actuators.
 - `src/frank_wt_mf_pirn/objectives.py`: objective projection.
 - `src/frank_wt_mf_pirn/fixtures.py`: packaged validation backend.
 - `scripts/run_structural_fixture.py`: validation run.
+- `plotting/`: fixed figure data and final plotting code.
 
 ## Run
 
 ```powershell
 python -m pip install -e ".[dev]"
 python .\scripts\run_structural_fixture.py
+```
+
+To reproduce the quantitative figures:
+
+```powershell
+python -m pip install -r .\plotting\requirements.txt
+python .\plotting\scripts\plot_all.py
 ```

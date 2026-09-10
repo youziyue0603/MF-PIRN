@@ -1,0 +1,5 @@
+mesh_size_mm,shape_error,blocking_force_mN,peak_stress_MPa,director_residual,runtime_min
+0.08,0.049,37.2,0.81,0.0081,3.2
+0.04,0.039,39.8,0.86,0.0046,11.4
+0.02,0.0358,40.7,0.89,0.0027,48.3
+0.0125,0.0353,40.9,0.895,0.0022,128.0
